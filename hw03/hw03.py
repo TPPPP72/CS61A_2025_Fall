@@ -117,8 +117,15 @@ def count_dollars(total):
     >>> check(SOURCE_FILE, 'count_dollars', ['While', 'For'])
     True
     """
-    "*** YOUR CODE HERE ***"
-
+    def f(n, m):
+        if n < 0:
+            return 0
+        elif n == 0:
+            return 1
+        if m == 1:
+            return 1
+        return f(n - m, m) + f(n, next_smaller_dollar(m))
+    return f(total, 100)
 
 def next_larger_dollar(bill):
     """Returns the next larger bill in order."""
@@ -153,7 +160,15 @@ def count_dollars_upward(total):
     >>> check(SOURCE_FILE, 'count_dollars_upward', ['While', 'For'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    def f(n, m):
+        if n > total:
+            return 0
+        elif n == total:
+            return 1
+        if m == 100:
+            return f(n + m, m)
+        return f(n + m, m) + f(n, next_larger_dollar(m))
+    return f(0, 1)
 
 
 def print_move(origin, destination):
